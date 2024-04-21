@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">GitSearch</string>
+    <string name="enter_user_hint">Enter a github user id</string>
+    <string name="search">search</string>
+    <string name="back_to_home">Back To Home Screen</string>
+    <string name="id">user id = </string>
+    <string name="name">username = </string>
+    <string name="repo_type">Repo Type = </string>
+    <string name="fork">Fork Count= </string>
+    <string name="git_url">Git Url = </string>
+    <string name="created_at">Created at = </string>
+    <string name="stargazers_count">stargazers count = </string>
+    <string name="has_downloads">has downloads = </string>
+    <string name="watchers_count">Watcher count = </string>
+    <string name="open_issues_count">Open issues = </string>
+    <string name="user_image">profile image</string>
+    <string name="title_activity_repo_list">RepoList</string>
+    <string name="title_activity_details">DetailsActivity</string>
+    <string name="title_activity_navigation">NavigationActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+</resources>
