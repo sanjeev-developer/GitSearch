@@ -1,5 +1,6 @@
 package com.git.gitsearch.ui
 
+import android.content.res.Resources
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -9,6 +10,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -18,7 +20,11 @@ import com.git.gitsearch.models.response.UserRepoResponseItem
 import com.git.gitsearch.utility.Routes
 
 @Composable
-fun RepoDetails(navController: NavHostController, result: UserRepoResponseItem?) {
+fun RepoDetails(
+    navController: NavHostController,
+    result: UserRepoResponseItem?,
+    totalForkCount: Int?
+) {
     val contextResources = LocalContext.current.resources
 
     Column {
@@ -59,7 +65,8 @@ fun RepoDetails(navController: NavHostController, result: UserRepoResponseItem?)
         }
         Row {
             Text(
-                text = contextResources.getString(R.string.fork), fontWeight = FontWeight.Bold,
+                text = contextResources.getString(R.string.current_repo_fork),
+                fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(10.dp)
             )
             Text(text = result?.forks_count.toString(), modifier = Modifier.padding(10.dp))
@@ -104,15 +111,42 @@ fun RepoDetails(navController: NavHostController, result: UserRepoResponseItem?)
             )
             Text(text = result?.has_downloads.toString(), modifier = Modifier.padding(10.dp))
         }
+        CheckTotalFork(contextResources, totalForkCount)
 
         Spacer(modifier = Modifier.weight(1f))
         Button(
             onClick = {
                 navController.navigate(Routes.homeScreen)
             },
-            modifier = Modifier.padding(all = 20.dp).fillMaxWidth()
+            modifier = Modifier
+                .padding(all = 20.dp)
+                .fillMaxWidth()
         ) {
             Text(contextResources.getString(R.string.back_to_home))
+        }
+    }
+}
+
+@Composable
+private fun CheckTotalFork(contextResources: Resources, totalForkCount: Int?) {
+    if (totalForkCount != null) {
+
+        Row {
+            Text(
+                text = contextResources.getString(R.string.Total_user_fork),
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(10.dp)
+            )
+            if (totalForkCount >= 5000) {
+                Text(
+                    text = totalForkCount.toString(),
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(10.dp),
+                    color = Color.Red
+                )
+            } else {
+                Text(text = totalForkCount.toString(), modifier = Modifier.padding(10.dp))
+            }
         }
     }
 }

@@ -6,7 +6,8 @@
     <string name="id">user id = </string>
     <string name="name">username = </string>
     <string name="repo_type">Repo Type = </string>
-    <string name="fork">Fork Count= </string>
+    <string name="current_repo_fork">Current Repo Fork = </string>
+    <string name="Total_user_fork">Total User Fork Count= </string>
     <string name="git_url">Git Url = </string>
     <string name="created_at">Created at = </string>
     <string name="stargazers_count">stargazers count = </string>

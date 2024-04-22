@@ -33,7 +33,7 @@ fun SetRepoList(homeViewModel: HomeViewModel, navController: NavController) {
         }
 
         is ApiState.Success -> {
-            SetLazyList(result.data, navController)
+            SetLazyList(result.data, navController, calculateTotalForks(result.data))
         }
 
         is ApiState.Failure -> {
@@ -43,27 +43,33 @@ fun SetRepoList(homeViewModel: HomeViewModel, navController: NavController) {
 }
 
 @Composable
-fun SetLazyList(data: UserRepoResponse?, navController: NavController) {
+fun SetLazyList(data: UserRepoResponse?, navController: NavController, calculateTotalForks: Int) {
     LazyColumn {
         if (data != null) {
             items(data.size) {
-                LazyListItem(data[it], navController)
+                LazyListItem(data[it], navController, calculateTotalForks)
             }
         }
     }
 }
 
 @Composable
-fun LazyListItem(userRepoResponseItem: UserRepoResponseItem, navController: NavController) {
+fun LazyListItem(
+    userRepoResponseItem: UserRepoResponseItem,
+    navController: NavController,
+    calculateTotalForks: Int
+) {
     Card(
         modifier = Modifier
             .padding(all = 10.dp)
             .fillMaxWidth()
             .clickable {
-                navController.currentBackStackEntry?.savedStateHandle?.set(
-                    key = "data",
-                    value = userRepoResponseItem
-                )
+
+                navController.currentBackStackEntry?.savedStateHandle?.apply {
+                    set("data", userRepoResponseItem)
+                    set("total_no_forks", calculateTotalForks)
+                }
+
                 navController.navigate(Routes.detailScreen)
             },
 
@@ -94,6 +100,16 @@ fun LazyListItem(userRepoResponseItem: UserRepoResponseItem, navController: NavC
             )
         }
     }
+}
+
+private fun calculateTotalForks(userRepoResponse: UserRepoResponse?): Int {
+    var totalCount = 0
+    if (userRepoResponse != null) {
+        for (i in userRepoResponse) {
+            totalCount += i.forks_count
+        }
+    }
+    return totalCount
 }
 
 

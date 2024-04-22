@@ -19,7 +19,8 @@ fun SetupNavGraph()
         composable(Routes.detailScreen)
         {
             val result = navController.previousBackStackEntry?.savedStateHandle?.get<UserRepoResponseItem>("data")
-            RepoDetails(navController, result)
+            val totalForkCount = navController.previousBackStackEntry?.savedStateHandle?.get<Int>("total_no_forks")
+            RepoDetails(navController, result, totalForkCount)
         }
     })
 }
