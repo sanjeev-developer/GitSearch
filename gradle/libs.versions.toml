@@ -21,11 +21,13 @@ kotlinxCoroutinesAndroid = "1.7.3"
 lifecycleViewmodelCompose = "2.7.0"
 hiltAndroidx = "1.2.0"
 junitKtx = "1.1.5"
+uiTest = "1.6.6"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
+androidx-ui-test = { module = "androidx.compose.ui:ui-test", version.ref = "uiTest" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hiltAndroidTesting" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }

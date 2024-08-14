@@ -12,4 +12,16 @@ interface ApiService {
 
     @GET("{userId}/repos")
     suspend fun getUserRepo(@Path("userId") user: String?): UserRepoResponse
+
+//    // Retrofit API interface
+//    interface ApiService {
+//        @POST("endpoint") // Replace with your actual endpoint
+//        fun sendData(@Body body: PostRequestBody): Call<PostResponse>
+//    }
+//
+//    // Data class representing the body of your POST request
+//    data class PostRequestBody(
+//        val key1: String,
+//        val key2: String
+//    )
 }

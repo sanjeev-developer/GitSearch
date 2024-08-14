@@ -1,5 +1,9 @@
 package com.git.gitsearch.viewmodel
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -24,6 +28,8 @@ class HomeViewModel @Inject constructor(private val apiRepository: ApiRepository
     private var _userFlowData = MutableStateFlow<ApiState<UserDataResponse>>(ApiState.Loading())
     val userFlowData : StateFlow<ApiState<UserDataResponse>> get() = _userFlowData
 
+    var githubName by mutableStateOf("")
+
 
     fun getUserRepoData(gitUsername: String)
     {
@@ -31,9 +37,10 @@ class HomeViewModel @Inject constructor(private val apiRepository: ApiRepository
             val result = apiRepository.fetchUserRepoData(gitUsername)
 
             when(result){
-                is ApiState.Success ->{
+                is ApiState.Success -> {
                     _userRepoFlowData.emit(ApiState.Success(result.data))
                 }
+
                 is ApiState.Failure ->{
                     _userRepoFlowData.emit(ApiState.Failure(result.errorMessage.toString()))
                 }

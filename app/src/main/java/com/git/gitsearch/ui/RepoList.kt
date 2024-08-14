@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
 import com.git.gitsearch.models.response.UserRepoResponse
 import com.git.gitsearch.models.response.UserRepoResponseItem
